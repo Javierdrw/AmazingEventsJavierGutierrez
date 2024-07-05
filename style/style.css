@@ -1,0 +1,75 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.btn{
+    height: 60%;
+
+}
+
+header{
+    min-height: 10vh;
+}
+main{
+    min-height: 80vh;
+}
+
+footer{
+    min-height: 10vh;
+}
+
+.d-block{
+    height: 25dvh;
+    object-fit: cover;
+    object-position: 25%;
+ 
+    
+}
+
+.nav-item:hover{
+    box-shadow: 1px 6px 10px rgb(80, 82, 79);
+}
+
+.text{
+    color: white;
+}
+
+.card-text{
+    min-height: 71.97px;
+}
+
+.card{
+    width: 300px;
+    min-height: 480px;
+}
+
+.card-2{
+    transition: 50ms;
+}
+
+.card-2:hover{
+    box-shadow: 1px 8px 10px rgb(0, 100, 200);
+}
+
+.card-img-top{
+    height: 42vh;
+}
+.pst{
+    position: relative;
+}
+
+.pst-h2{
+    position: absolute;
+}
+
+.shadow{
+    color: white;
+    text-shadow: 2px 1px 1px black;
+}
+
+tr{
+    height: 40.89px;
+}
+/* amazingEventsCarlosBarrios */
