@@ -41,8 +41,8 @@ footer{
 }
 
 .card{
-    width: 300px;
-    min-height: 480px;
+    width: 280px;
+    min-height: 400px;
 }
 
 .card-2{
@@ -54,7 +54,7 @@ footer{
 }
 
 .card-img-top{
-    height: 42vh;
+    height: 204.72px;
 }
 .pst{
     position: relative;
