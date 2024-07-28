@@ -214,7 +214,7 @@ for(let i = 0; i <data1.events.length; i++ ){
             </p>
             <div class="d-flex justify-content-between">
               <h6 class="d-flex align-items-center">$ ${data1.events[i].price}</h6>
-              <a href="./pages/detail.html" class="btn card-2 btn-primary">Details</a>
+              <a href="../pages/detail.html" class="btn card-2 btn-primary">Details</a>
             </div>
           </div>`
 
