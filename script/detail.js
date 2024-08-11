@@ -194,133 +194,56 @@ const data1 = {
     },
   ],
 };
+const arrayObjet = data1.events
+let url = window.location.href;
+console.log(url);
+let urlParrans = new URL(url);
+console.log(urlParrans);
 
-const arrayObjet = data1.events;
-const uniqueCategories = Array.from(
-  arrayObjet.reduce((acc, event) => {
-    acc.add(event.category);
-    return acc;
-  }, new Set())
-);
+let urlObjeto = new URLSearchParams(urlParrans.search);
+console.log(urlObjeto.get("id"));
 
-const arrayUpcomingEvents = arrayObjet.filter(
-  (evento) => evento.date < data1.currentDate
-);
-console.log(arrayUpcomingEvents);
-
-const sectionPastEvents = document.querySelector("#sectionPastEvents");
-console.log(sectionPastEvents);
-
-function createCategory(array) {
-  const divCategory = document.getElementById("category");
-
-  array.forEach((element) => {
-    const div = document.createElement("div");
-    div.classList = "form-check pt-3 mb-3";
-    div.innerHTML = `
-      <div class="form-check pt-3 mb-3">
-        <input type="checkbox" class="form-check-input" value="${element}" />
-        <label class="form-check-label">${element}</label>
-      </div>`;
-    divCategory.appendChild(div);
-  });
-}
-createCategory(uniqueCategories);
+let detailAShow = urlObjeto.get("id");
 
 function crearCard(array) {
-  sectionPastEvents.innerHTML = "";
-  if (array.length === 0) {
-    sectionPastEvents.innerHTML =
-      "<p>No se ha encontrado ninguna coincidencia.</p>";
-    return;
-  }
-
-  array.forEach((element) => {
-    let card = document.createElement("div");
-    card.className = "card";
-    card.innerHTML = `
-        <img src="${element.image}" class="p-2 card-img-top" alt="${element.name}">
-        <div class="card-body">
-          <h5 class="card-title text-center my-2">${element.name}</h5>
-          <p class="card-text">${element.description}</p>
-          <div class="d-flex justify-content-between">
-            <h6 class="d-flex align-items-center">$${element.price}</h6>
-            <a href="./detail.html?id=${element._id}" class="btn card-2 btn-primary">Details</a>
+    const sectionDetail = document.getElementById('sectionDetail');
+    sectionDetail.innerHTML = "";
+    
+    // Buscar el evento a mostrar basado en el ID 'detailAShow'
+    let evento = array.find(e => e._id == detailAShow);
+    
+    if (evento) {
+      // Determinar si mostrar 'estimate' o 'assistance' basado en la fecha del evento
+      let valueToShow = new Date(evento.date) > new Date(data1.currentDate) ? "estimate" : "assistance";
+      
+      // Crear el card con la información del evento
+      let card = document.createElement("div");
+      card.classList = "d-flex flex-md-row flex-column p-3 gap-3";
+      card.innerHTML = `
+        <div class="col-md-6 col-sm-12 col-12 p-2 border">
+            <img
+              class="col-12"
+              src="${evento.image}"
+              alt="${evento.name}"
+            />
           </div>
-        </div>`;
-
-    sectionPastEvents.appendChild(card);
-  });
-}
-crearCard(arrayUpcomingEvents);
-
-function FilterBySearch(arrayObjet, search) {
-  return arrayObjet.filter(
-    (objeto) =>
-      objeto.name.toLowerCase().trim().includes(search) ||
-      objeto.description.toLowerCase().trim().includes(search)
-  );
-}
-
-function FilterByCategory(arrayElementos, arrayObjetos) {
-  return arrayObjetos.filter((objeto) =>
-    arrayElementos.includes(objeto.category)
-  );
-}
-
-document.getElementById("category").addEventListener("change", applyFilters);
-document.getElementById("search").addEventListener("keyup", applyFilters);
-
-function applyFilters() {
-  let checked = document.querySelectorAll("input[type=checkbox]:checked");
-  let selectedCategories = Array.from(checked).map(
-    (checkbox) => checkbox.value
-  );
-  let searchValue = document
-    .getElementById("search")
-    .value.toLowerCase()
-    .trim();
-
-  let filteredArray = arrayUpcomingEvents;
-
-  if (selectedCategories.length > 0) {
-    filteredArray = FilterByCategory(selectedCategories, filteredArray);
+          <div class="col-md-6 col-sm-12 p-2 col-12 border">
+            <h2 class="text-center">${evento.name}</h2>
+            <p><b>Date:</b> ${evento.date}</p>
+            <p><b>Description:</b> ${evento.description}</p>
+            <p><b>Category:</b> ${evento.category}</p>
+            <p><b>Place:</b> ${evento.place}</p>
+            <p><b>Capacity:</b> ${evento.capacity}</p>
+            <p><b>${valueToShow.charAt(0).toUpperCase() + valueToShow.slice(1)}:</b> ${evento[valueToShow]}</p>
+            <p><b>Price:</b> ${evento.price}</p>
+          </div>`;
+    
+      sectionDetail.appendChild(card);
+    } else {
+      sectionDetail.innerHTML = "<p>Event not found.</p>";
+    }
   }
-
-  if (searchValue) {
-    filteredArray = FilterBySearch(filteredArray, searchValue);
-  }
-
-  crearCard(filteredArray);
-}
-
-// const sectionPastEvents = document.querySelector('#sectionPastEvents')
-// console.log(sectionPastEvents);
-
-
-// for(let i = 0; i <data1.events.length; i++ ){
-//     if(data1.events[i].date < data1.currentDate){
-//         let card = document.createElement("div")
-//         card.className = "card"
-//         card.innerHTML=`
-//             <img src="${data1.events[i].image}" class="p-2 card-img-top" alt="${data1.events[i].name}"> 
-//             <div class="card-body">
-//             <h5 class="card-title text-center my-2">
-//               ${data1.events[i].name}
-//             </h5>
-//             <p class="card-text">
-//             ${data1.events[i].description}
-//             </p>
-//             <div class="d-flex justify-content-between">
-//               <h6 class="d-flex align-items-center">$ ${data1.events[i].price}</h6>
-//               <a href="../pages/detail.html" class="btn card-2 btn-primary">Details</a>
-//             </div>
-//           </div>`
-
-//         sectionPastEvents.appendChild(card)
-//     }
-    
-    
-
-    
-// }
+  
+  // Ejemplo de uso
+  crearCard(arrayObjet);
+  
