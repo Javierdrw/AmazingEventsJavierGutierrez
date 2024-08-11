@@ -269,7 +269,12 @@ function FilterByCategory(arrayElementos, arrayObjetos) {
 }
 
 document.getElementById("category").addEventListener("change", applyFilters);
-document.getElementById("search").addEventListener("keyup", applyFilters);
+document
+  .getElementById("search-button")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    applyFilters();
+  });
 
 function applyFilters() {
   let checked = document.querySelectorAll("input[type=checkbox]:checked");
@@ -293,34 +298,3 @@ function applyFilters() {
 
   crearCard(filteredArray);
 }
-
-// const sectionPastEvents = document.querySelector('#sectionPastEvents')
-// console.log(sectionPastEvents);
-
-
-// for(let i = 0; i <data1.events.length; i++ ){
-//     if(data1.events[i].date < data1.currentDate){
-//         let card = document.createElement("div")
-//         card.className = "card"
-//         card.innerHTML=`
-//             <img src="${data1.events[i].image}" class="p-2 card-img-top" alt="${data1.events[i].name}"> 
-//             <div class="card-body">
-//             <h5 class="card-title text-center my-2">
-//               ${data1.events[i].name}
-//             </h5>
-//             <p class="card-text">
-//             ${data1.events[i].description}
-//             </p>
-//             <div class="d-flex justify-content-between">
-//               <h6 class="d-flex align-items-center">$ ${data1.events[i].price}</h6>
-//               <a href="../pages/detail.html" class="btn card-2 btn-primary">Details</a>
-//             </div>
-//           </div>`
-
-//         sectionPastEvents.appendChild(card)
-//     }
-    
-    
-
-    
-// }

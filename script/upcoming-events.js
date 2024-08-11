@@ -269,7 +269,12 @@ function FilterByCategory(arrayElementos, arrayObjetos) {
 }
 
 document.getElementById("category").addEventListener("change", applyFilters);
-document.getElementById("search").addEventListener("keyup", applyFilters);
+document
+  .getElementById("search-button")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    applyFilters();
+  });
 
 function applyFilters() {
   let checked = document.querySelectorAll("input[type=checkbox]:checked");

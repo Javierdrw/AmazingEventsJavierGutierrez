@@ -194,7 +194,7 @@ const data1 = {
     },
   ],
 };
-const arrayObjet = data1.events
+const arrayObjet = data1.events;
 let url = window.location.href;
 console.log(url);
 let urlParrans = new URL(url);
@@ -206,20 +206,23 @@ console.log(urlObjeto.get("id"));
 let detailAShow = urlObjeto.get("id");
 
 function crearCard(array) {
-    const sectionDetail = document.getElementById('sectionDetail');
-    sectionDetail.innerHTML = "";
-    
-    // Buscar el evento a mostrar basado en el ID 'detailAShow'
-    let evento = array.find(e => e._id == detailAShow);
-    
-    if (evento) {
-      // Determinar si mostrar 'estimate' o 'assistance' basado en la fecha del evento
-      let valueToShow = new Date(evento.date) > new Date(data1.currentDate) ? "estimate" : "assistance";
-      
-      // Crear el card con la información del evento
-      let card = document.createElement("div");
-      card.classList = "d-flex flex-md-row flex-column p-3 gap-3";
-      card.innerHTML = `
+  const sectionDetail = document.getElementById("sectionDetail");
+  sectionDetail.innerHTML = "";
+
+  // Buscar el evento a mostrar basado en el ID 'detailAShow'
+  let evento = array.find((e) => e._id == detailAShow);
+
+  if (evento) {
+    // Determinar si mostrar 'estimate' o 'assistance' basado en la fecha del evento
+    let valueToShow =
+      new Date(evento.date) > new Date(data1.currentDate)
+        ? "estimate"
+        : "assistance";
+
+    // Crear el card con la información del evento
+    let card = document.createElement("div");
+    card.classList = "d-flex flex-md-row flex-column p-3 gap-3";
+    card.innerHTML = `
         <div class="col-md-6 col-sm-12 col-12 p-2 border">
             <img
               class="col-12"
@@ -234,16 +237,17 @@ function crearCard(array) {
             <p><b>Category:</b> ${evento.category}</p>
             <p><b>Place:</b> ${evento.place}</p>
             <p><b>Capacity:</b> ${evento.capacity}</p>
-            <p><b>${valueToShow.charAt(0).toUpperCase() + valueToShow.slice(1)}:</b> ${evento[valueToShow]}</p>
+            <p><b>${
+              valueToShow.charAt(0).toUpperCase() + valueToShow.slice(1)
+            }:</b> ${evento[valueToShow]}</p>
             <p><b>Price:</b> ${evento.price}</p>
           </div>`;
-    
-      sectionDetail.appendChild(card);
-    } else {
-      sectionDetail.innerHTML = "<p>Event not found.</p>";
-    }
+
+    sectionDetail.appendChild(card);
+  } else {
+    sectionDetail.innerHTML = "<p>Event not found.</p>";
   }
-  
-  // Ejemplo de uso
-  crearCard(arrayObjet);
-  
+}
+
+// Ejemplo de uso
+crearCard(arrayObjet);

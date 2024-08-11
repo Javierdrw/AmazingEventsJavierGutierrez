@@ -249,10 +249,12 @@ function createCategory(array) {
 createCategory(uniqueCategories);
 
 document.getElementById("category").addEventListener("change", applyFilters);
-document.getElementById("search-button").addEventListener("click", function(event) {
-  event.preventDefault(); // Evita que el formulario se envíe
-  applyFilters();
-});
+document
+  .getElementById("search-button")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    applyFilters();
+  });
 
 function applyFilters() {
   let checked = document.querySelectorAll("input[type=checkbox]:checked");
@@ -290,108 +292,3 @@ function FilterByCategory(arrayElementos, arrayObjetos) {
     arrayElementos.includes(objeto.category)
   );
 }
-
-// const arrayObjet = data1.events;
-// const sectionHome = document.querySelector("#sectionHome");
-
-// function crearCard(array) {
-//   sectionHome.innerHTML = "";
-//   array.forEach((element) => {
-//     let card = document.createElement("div");
-//     card.className = "card";
-//     card.innerHTML = `
-//             <img src="${element.image}" class="p-2 card-img-top" alt="${element.name}">
-//             <div class="card-body">
-//             <h5 class="card-title text-center my-2">
-//               ${element.name}
-//             </h5>
-//             <p class="card-text">
-//             ${element.description}
-//             </p>
-//             <div class="d-flex justify-content-between">
-//               <h6 class="d-flex align-items-center">$ ${element.price}</h6>
-//               <a href="./pages/detail.html" class="btn card-2 btn-primary">Details</a>
-//             </div>
-//           </div>`;
-
-//     sectionHome.appendChild(card);
-//   });
-// }
-
-// crearCard(data1.events);
-
-// const uniqueCategories = Array.from(
-//   data1.events.reduce((acc, event) => {
-//     acc.add(event.category);
-//     return acc;
-//   }, new Set())
-// );
-
-// // console.log(uniqueCategories);
-
-// function createCategory(array) {
-//   const divCategory = document.getElementById("category");
-
-//   array.forEach((element) => {
-//     const div = document.createElement("div");
-//     div.classList = "form-check pt-3 mb-3";
-
-//     div.innerHTML = `
-//         <div class="form-check pt-3 mb-3">
-//         <input
-//               type="checkbox"
-//               class="form-check-input"
-//               value="${element}"/>
-//         <label class="form-check-label" for="validationFormCheck1">
-//           ${element}
-//         </label>
-//         </div>`;
-//     divCategory.appendChild(div);
-//   });
-// }
-// createCategory(uniqueCategories);
-
-// const category = document
-//   .getElementById("category")
-//   .addEventListener("change", (e) => {
-//     let checked = document.querySelectorAll("input[type=checkbox]:checked");
-//     let arreglo = Array.from(checked).map((checkbox) => checkbox.value);
-//     crearCard(FilterByCategory(arreglo, arrayObjet));
-//   });
-
-// const search = document
-//   .getElementById("search")
-//   .addEventListener("keyup", (e) => {
-//     console.log(e.target.value);
-//     crearCard(FilterBySearch(arrayObjet, e.target.value.toLowerCase().trim()));
-//   });
-
-// function FilterBySearch(arrayObjet, search) {
-//   const coincidencias = [];
-//   if (search != " ") {
-//     arrayObjet.forEach((objeto) => {
-//       if (objeto.name.toLowerCase().trim().includes(search)) {
-//         coincidencias.push(objeto);
-//       }
-//     });
-//   }
-//   return coincidencias;
-// }
-
-// function FilterByCategory(arrayElementos, arrayObjetos) {
-//   const coincidencias = [];
-//   if(arrayElementos.length>0){
-//     arrayElementos.forEach((elemento) => {
-//       arrayObjetos.forEach((objeto) => {
-//         if (objeto.category.includes(elemento)) {
-//           coincidencias.push(objeto);
-//         }
-//       });
-//     });
-
-//   }else{
-//     crearCard(data1.events);
-//   }
-
-//   return coincidencias;
-// }
