@@ -279,7 +279,7 @@ function applyFilters() {
   crearCard(filteredArray);
 }
 
-function FilterBySearch(arrayObjet, search) {
+const FilterBySearch =(arrayObjet, search)=> {
   return arrayObjet.filter(
     (objeto) =>
       objeto.name.toLowerCase().trim().includes(search) ||
