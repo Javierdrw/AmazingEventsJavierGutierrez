@@ -209,17 +209,14 @@ function crearCard(array) {
   const sectionDetail = document.getElementById("sectionDetail");
   sectionDetail.innerHTML = "";
 
-  // Buscar el evento a mostrar basado en el ID 'detailAShow'
   let evento = array.find((e) => e._id == detailAShow);
 
   if (evento) {
-    // Determinar si mostrar 'estimate' o 'assistance' basado en la fecha del evento
     let valueToShow =
       new Date(evento.date) > new Date(data1.currentDate)
         ? "estimate"
         : "assistance";
 
-    // Crear el card con la información del evento
     let card = document.createElement("div");
     card.classList = "d-flex flex-md-row flex-column p-3 gap-3";
     card.innerHTML = `
@@ -249,5 +246,4 @@ function crearCard(array) {
   }
 }
 
-// Ejemplo de uso
 crearCard(arrayObjet);
