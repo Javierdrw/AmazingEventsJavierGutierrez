@@ -239,7 +239,7 @@ function createCategory(array) {
     const div = document.createElement("div");
     div.classList = "form-check pt-3 mb-3";
     div.innerHTML = `
-      <div class="form-check pt-3 mb-3">
+      <div class="form-check">
         <input type="checkbox" class="form-check-input" value="${element}" />
         <label class="form-check-label">${element}</label>
       </div>`;
