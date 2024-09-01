@@ -32,10 +32,23 @@ footer{
     box-shadow: 1px 6px 10px rgb(80, 82, 79);
 }
 
+.fondo{
+    background-color: #48c9b0;
+}
+
+.fondo-navbar{
+    background-color: #0b5345;
+    color: #fdfefe;
+}
 .text{
     color: white;
 }
 
+#sectionHome{
+    display: grid;
+    place-content: center;
+    padding-bottom: 2rem;
+}
 .card-text{
     min-height: 71.97px;
 }
@@ -72,4 +85,8 @@ footer{
 tr{
     height: 40.89px;
 }
-/* amazingEventsCarlosBarrios */
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}

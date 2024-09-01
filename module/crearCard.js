@@ -25,7 +25,6 @@ export function pintarCardPage(arrayData) {
         <p class="card-text">${element.description}</p>
         <div class="d-flex justify-content-between">
         <h6 class="d-flex align-items-center">$${element.price}</h6>
-        <p>Categoria: ${element.category}</p>
         <a href="${page === "Home" ? `./pages/detail.html?id=${element._id}` : `./detail.html?id=${element._id}`}" class="btn card-2 btn-primary">Details</a>
         </div>
         </div>`;
@@ -38,34 +37,35 @@ export function pintarCardPage(arrayData) {
     const arrayPastEvents = array.filter(evento => evento.date < currentDate);
 
     
-    
     sectionHome.innerHTML = "";
     
     
     // pintarCard(arrayPastEvents);
     if (page === "Home") {
-      pintarCard(array);
+      if (array.length === 0) {
+        sectionHome.innerHTML = "<p>No se ha encontrado ninguna coincidencia.</p>";
+        return;
+      } else {
+        pintarCard(array);
+      }
     } else if (page === "PAST-EVENTS") {
       if (arrayPastEvents.length === 0) {
         sectionHome.innerHTML = "<p>No se ha encontrado ninguna coincidencia.</p>";
-       return;
-       
-      }else{
+        return;
+      } else {
         pintarCard(arrayPastEvents);
       }
     } else {
       if (arrayUpcomingEvents.length === 0) {
         sectionHome.innerHTML = "<p>No se ha encontrado ninguna coincidencia.</p>";
         return;
-
-      } else{
+      } else {
         pintarCard(arrayUpcomingEvents);
       }
-      // pintarCard(arrayUpcomingEvents);
     }
+
   }
 
-    // Si no se pasa un array, realiza el fetch
     fetch(url1)
       .then((response) => response.json())
       .then((data) => {

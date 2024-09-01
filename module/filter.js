@@ -4,9 +4,7 @@ let searchValue = ""; // Declara searchValue globalmente si es necesario
 
 document.getElementById("search-button").addEventListener("click", function (event) {
     event.preventDefault();
-    searchValue = document.querySelector("#search").value.toLowerCase().trim();
-   
-    
+
     applyFilters(); 
 });
 
@@ -27,7 +25,7 @@ export function applyFilters() {
   fetch(url1).then((response) => response.json()).then((data) => {
     let filteredArray  = data.events;
     
-
+    searchValue = document.querySelector("#search").value.toLowerCase().trim();
     if (selectedCategories.length > 0) {
       filteredArray = FilterByCategory(selectedCategories, filteredArray);
       

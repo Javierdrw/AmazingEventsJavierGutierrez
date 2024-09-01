@@ -1,3 +1,5 @@
+import { calcularGananciasYAsistenciaPorCategoriaDeFuturoEventos } from "./filterEarningsAttendancePast.js";
+import { calcularGananciasYAsistenciaPorCategoriaDeEventosPasados } from "./filterEarningsFutureAssistance.js";
 const url = 'https://aulamindhub.github.io/amazing-api/events.json';
 
 
@@ -20,6 +22,14 @@ export function pinterTable() {
     
       return highestAttendanceEvent;
     }
+   
+    const CGPAEF = calcularGananciasYAsistenciaPorCategoriaDeFuturoEventos(dataEvents, data.currentDate);
+    
+    const arrayDeCategorias = Object.values(CGPAEF);
+
+    const CGPAEP = calcularGananciasYAsistenciaPorCategoriaDeEventosPasados(dataEvents, data.currentDate);
+
+    const arrayDeCategoriasEP = Object.values(CGPAEP);
     function getEventWithLowestAttendance() {
       let LowestAttendanceEvent = null;
       let minorAssistance = Infinity; // Inicializa con un valor muy grande
@@ -39,17 +49,6 @@ export function pinterTable() {
       return current.capacity > max.capacity ? current : max;
     }, dataEvents[0]);
 
-    const uniqueCategories = Array.from(
-      dataEvents.reduce((acc, event) => {
-        acc.add(event.category);
-        return acc;
-      }, new Set())
-    );
-
-    console.log(uniqueCategories);
-    
-    
-    
     const eventWithHighestAttendance = getEventWithHighestAttendance();
     const eventWithLowestAttendance = getEventWithLowestAttendance();
     
@@ -63,9 +62,9 @@ export function pinterTable() {
         </thead>
         <tbody>
           <tr>
-            <td>Events with highest % of assistance</td>
-            <td>Events with lowest % of assistance</td>
-            <td>Events with larger capacity</td>
+            <th>Events with highest % of assistance</th>
+            <th>Events with lowest % of assistance</th>
+            <th>Events with larger capacity</th>
           </tr>
           <tr>
             <td>${eventWithHighestAttendance.name}</td>
@@ -84,16 +83,16 @@ export function pinterTable() {
               </thead>
               <tbody>
                 <tr>
-                  <td>Categories</td>
-                  <td>Revenues</td>
-                  <td>Percentage of assitance</td>
+                  <th class="text-center">Categories</th>
+                  <th class="text-center">Revenues</th>
+                  <th class="text-center">Percentage of assitance</th>
                 </tr>
-                ${uniqueCategories.map((category) => {
+                ${arrayDeCategorias.map((category) => {
                   return `
                     <tr>
-                      <th>${category}</th>
-                      <td></td>
-                      <td></td>
+                      <td class="text-center">${category.category}</td>
+                      <td class="text-center">${category.ganancias.toLocaleString('es-ES')} $</td>
+                      <td class="text-center">${category.porcentajeAsistencia}</td>
                     </tr>
                   `;
                 }).join("")}
@@ -109,21 +108,19 @@ export function pinterTable() {
               </thead>
               <tbody>
                 <tr>
-                  <td>Categories</td>
-                  <td>Revenues</td>
-                  <td>Percentage of assitance</td>
+                  <th class="text-center">Categories</th>
+                  <th class="text-center">Revenues</th>
+                  <th class="text-center">Percentage of assitance</th>
                 </tr>
-                <tr>
-                  <th></th>
-                  <td></td>
-                  <td></td>
-                </tr>
-      
-                <tr>
-                  <th></th>
-                  <td></td>
-                  <td></td>
-                </tr>
+                ${arrayDeCategoriasEP.map((category) => {
+                  return `
+                    <tr>
+                      <td class="text-center">${category.category}</td>
+                      <td class="text-center">${category.ganancias.toLocaleString('es-ES')} $</td>
+                      <td class="text-center">${category.porcentajeAsistencia}</td>
+                    </tr>
+                  `;
+                }).join("")}
               </tbody>`;
   })
 }
