@@ -5,7 +5,7 @@ pintarCardPage(); // Esto pinta la página inicial
 
 document.getElementById("category").addEventListener("change", applyFilters);
 
-document.getElementById("search-button").addEventListener("click", function (event) {
+document.getElementById("search").addEventListener("input", function (event) {
     event.preventDefault();
     applyFilters();
 });

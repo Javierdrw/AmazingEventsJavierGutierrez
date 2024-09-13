@@ -43,21 +43,21 @@ export function pintarCardPage(arrayData) {
     // pintarCard(arrayPastEvents);
     if (page === "Home") {
       if (array.length === 0) {
-        sectionHome.innerHTML = "<p>No se ha encontrado ninguna coincidencia.</p>";
+        sectionHome.innerHTML = "<h2>No matching events found.</h2>";
         return;
       } else {
         pintarCard(array);
       }
     } else if (page === "PAST-EVENTS") {
       if (arrayPastEvents.length === 0) {
-        sectionHome.innerHTML = "<p>No se ha encontrado ninguna coincidencia.</p>";
+        sectionHome.innerHTML = "<h2>No matching events found.</h2>";
         return;
       } else {
         pintarCard(arrayPastEvents);
       }
     } else {
       if (arrayUpcomingEvents.length === 0) {
-        sectionHome.innerHTML = "<p>No se ha encontrado ninguna coincidencia.</p>";
+        sectionHome.innerHTML = "<h2>No matching events found.</h2>";
         return;
       } else {
         pintarCard(arrayUpcomingEvents);
